@@ -1,4 +1,5 @@
- a class TestRectangleMethods"""
+#!/usr/bin/python3
+"""Defines a class TestRectangleMethods"""
 
 
 from unittest.mock import patch

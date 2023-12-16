@@ -1,4 +1,5 @@
- a class BaseModelTest"""
+#!/usr/bin/python3
+"""Defines a class BaseModelTest"""
 
 
 import json
