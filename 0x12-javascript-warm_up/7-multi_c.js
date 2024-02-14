@@ -1,13 +1,13 @@
 #!/usr/bin/node
-const process = require('process');
-let numOfTimes = parseInt(process.argv[2]);
-const message1 = 'Missing number of occurrences';
-const message2 = 'C is fun';
-if (isNaN(numOfTimes)) {
-  console.log(message1);
+// prints 3 lines: (like 1-multi_languages.js) but by
+// using an array of string and a loop
+
+const lang = 'C is fun';
+
+if (isNaN(process.argv[2])) {
+  console.log('Missing number of occurrences');
 } else {
-  while (numOfTimes > 0) {
-    console.log(message2);
-    numOfTimes--;
+  for (let i = 0; i < parseInt(process.argv[2]); i++) {
+    console.log(lang);
   }
 }
