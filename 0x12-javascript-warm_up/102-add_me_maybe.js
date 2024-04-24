@@ -1,7 +1,7 @@
 #!/usr/bin/node
-// executes x times a function.
+// this is:
+// a function that increments and calls a function
 
 exports.addMeMaybe = function (number, theFunction) {
-  number++;
-  theFunction(number);
+  theFunction(++number);
 };
