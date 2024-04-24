@@ -1,20 +1,16 @@
 #!/usr/bin/python3
+"""0x11. Python - Network #1, task 7. Error code #1
 """
-Script that takes in a URL, sends a request to the URL and displays
-the body of the response.
-
-Usage: ./7-error_code.py <URL>
-  - Handles HTTP errors.
-"""
-from sys import argv
-import requests
-
 
 if __name__ == "__main__":
-    url = argv[1]
-    req = requests.get(url)
+    from requests import get
+    from sys import argv
 
-    if req.status_code >= 400:
-        print("Error code: {}".format(req.status_code))
+    try:
+        response = get(argv[1])
+        # override defualt handling of exceptions and reraise them
+        response.raise_for_status()
+    except:
+        print('Error code: {}'.format(response.status_code))
     else:
-        print(req.text)
+        print(response.text)

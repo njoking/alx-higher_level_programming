@@ -1,25 +1,19 @@
 #!/usr/bin/python3
+"""0x11. Python - Network #1, task 8. Search API
 """
-Script that takes in a letter and sends a POST request to
-http://0.0.0.0:5000/search_user with the letter as a parameter.
-
-sage: ./8-json_api.py <letter>
-  - The letter is sent as the value of the variable `q`.
-  - If no letter is provided, sends `q=""`.
-"""
-from sys import argv
-import requests
-
 
 if __name__ == "__main__":
-    letter = "" if len(argv) == 1 else argv[1]
-    req = requests.post("http://0.0.0.0:5000/search_user", {"q": letter})
+    from requests import post
+    from sys import argv
 
+    q = '' if len(argv) < 2 else argv[1]
+    response = post('http://0.0.0.0:5000/search_user', data={'q': q})
     try:
-        response = req.json()
-        if response == {}:
-            print("No result")
-        else:
-            print("[{}] {}".format(response.get("id"), response.get("name")))
+        json_dict = response.json()
     except ValueError:
-        print("Not a valid JSON")
+        print('No result' if response.status_code == 204
+              else 'Not a valid JSON')
+    else:
+        print('No result' if len(json_dict) == 0
+              else '[{}] {}'.format(json_dict.get('id'),
+                                    json_dict.get('name')))
