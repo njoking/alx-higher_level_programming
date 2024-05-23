@@ -1,16 +1,10 @@
 #!/usr/bin/python3
+"""0x11. Python - Network #1, task 5. Response header value #1
 """
-Script that takes in a URL, sends a request to the URL and displays the
-value of the variable X-Request-Id in the response header.
-
-Usage: ./5-hbtn_header.py <URL>
-"""
-import requests
-from sys import argv
-
 
 if __name__ == "__main__":
-    url = argv[1]
-    req = requests.get(url)
+    from requests import get
+    from sys import argv
 
-    print(req.headers.get("X-Request-Id"))
+    response = get(argv[1])
+    print(response.headers.get('x-request-id'))

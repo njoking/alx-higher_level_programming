@@ -1,22 +1,21 @@
 #!/usr/bin/python3
 """
-Python script that takes 2 arguments in order to solve this challenge.
-
-Usage: ./100-github_commits.py <repository name> <repository owner>
+A script that fetches the 10 most recent commits from a given repository
+and user.
 """
-from sys import argv
-import requests
 
+import requests
+import sys
 
 if __name__ == "__main__":
-    url = "https://api.github.com/repos/{}/{}/commits".format(argv[2], argv[1])
-    req = requests.get(url)
-    commits = req.json()
+    repo_name = sys.argv[1]
+    owner_name = sys.argv[2]
+    url = f"https://api.github.com/repos/{owner_name}/{repo_name}/commits"
 
-    try:
-        for index in range(10):
-            print("{}: {}".format(
-                commits[index].get("sha"),
-                commits[index].get("commit").get("author").get("name")))
-    except IndexError:
-        pass
+    response = requests.get(url)
+    commits = response.json()
+
+    for commit in commits[:10]:
+        sha = commit.get('sha')
+        author_name = commit.get('commit').get('author').get('name')
+        print(f"{sha}: {author_name}")
